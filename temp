@@ -1,0 +1,38 @@
+function pairwise(arr, sum) {
+  let index_mapping = get_lowest_index(arr)
+  let temp_arr = Object.keys(index_mapping)
+  // console.log(temp_arr)
+  let a = 0
+  let b = arr.length - 1
+  let ans = 0
+  while (a < b) {
+    const add = parseInt(temp_arr[a]) + parseInt(temp_arr[b])
+    if (add === sum) {
+      // console.log(`[${arr[a]}, ${arr[b]}]`)
+      ans += (index_mapping[temp_arr[a]] + index_mapping[temp_arr[b]])
+      a++
+      b--
+    } else if (add < sum) {
+      a++
+    } else {
+      b--
+    }
+  }
+  // console.log(ans)
+  return ans
+}
+
+function get_lowest_index(arr) {
+  let index_mapping = {}
+  arr.forEach((item, index) => {
+    if (!(item in index_mapping)) {
+      index_mapping[item] = index
+    }
+  });
+  return index_mapping
+}
+
+// const ans = pairwise([1, 4, 2, 3, 0, 5], 7);
+// const ans = pairwise([1, 3, 2, 4], 4)
+const ans = pairwise([1, 1, 1], 2)
+console.log(ans)
